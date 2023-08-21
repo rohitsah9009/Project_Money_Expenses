@@ -1,0 +1,104 @@
+package org.jsp.moneyexpenses.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.jsp.moneyexpenses.dao.ProductDao;
+import org.jsp.moneyexpenses.dao.UserDao;
+import org.jsp.moneyexpenses.dto.Product;
+import org.jsp.moneyexpenses.dto.ResponseStructure;
+import org.jsp.moneyexpenses.dto.User;
+import org.jsp.moneyexpenses.exception.InvalidIdException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+@Service
+
+public class ProductService {
+
+	@Autowired
+	private ProductDao pDao;
+	@Autowired
+	private UserDao uDao;
+	
+	public ResponseEntity<ResponseStructure<Product>> saveP(Product p, int u_id)
+	{
+		Optional<User> op=uDao.fetchById(u_id);
+		ResponseStructure<Product> s=new ResponseStructure<>();
+		if(op.isPresent())
+		{
+			User u=op.get();
+			u.getP().add(p);
+			p.setU(u);
+			uDao.updateUser(op.get());
+			pDao.addProduct(p);
+			s.setData(p);
+			s.setMessage("Product Added");
+			s.setStatusCode(HttpStatus.CREATED.value());
+			return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.CREATED);
+		}
+
+		throw new InvalidIdException();
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<Product>> updateP(Product p, int u_id)
+	{
+		Optional<User> op=uDao.fetchById(u_id);
+		ResponseStructure<Product> s=new ResponseStructure<>();
+		if(op.isPresent())
+		{
+			User u=op.get();
+			p.setU(u);
+			pDao.updateProduct(p);
+			s.setData(p);
+			s.setMessage("Product Added");
+			s.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.ACCEPTED);
+		}
+		throw new InvalidIdException();
+		
+	}
+
+	public ResponseEntity<ResponseStructure<Product>> fetch(int id) {
+		ResponseStructure<Product> s=new ResponseStructure<>();
+		Optional<Product> op=pDao.fetchById(id);
+		if(op.isPresent())
+		{
+			s.setData(op.get());
+			s.setMessage("Product Found");
+			s.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.OK);
+		}
+		throw new InvalidIdException();
+	}
+	
+	public ResponseEntity<ResponseStructure<String>> delete(int id)
+	{
+		ResponseStructure<String> s=new ResponseStructure<>();
+		Optional<Product> op=pDao.fetchById(id);
+		
+		if(op.isPresent())
+		{
+			s.setData("Product Found");
+			pDao.deleteProduct(id);
+			s.setMessage("Product Deleted");
+			s.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<String>>(s,HttpStatus.OK);
+		}
+		throw new InvalidIdException();
+	}
+	
+	public ResponseEntity<ResponseStructure<List<Product>>> fetchAll(int u_id)
+	{
+		ResponseStructure<List<Product>> s= new ResponseStructure<>();
+		
+		s.setData(pDao.fetchAllProduct(u_id));
+		s.setMessage("Product List Found");
+		s.setStatusCode(HttpStatus.FOUND.value());
+		return new ResponseEntity<ResponseStructure<List<Product>>>(s,HttpStatus.FOUND);
+	}
+	
+}

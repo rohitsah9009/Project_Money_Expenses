@@ -1,0 +1,20 @@
+package org.jsp.moneyexpenses.controller;
+
+import org.jsp.moneyexpenses.dto.Product;
+import org.jsp.moneyexpenses.service.ProductService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProductController {
+
+	private ProductService s;
+	
+	@PostMapping("/products/{u_id}")
+	public void save(@RequestBody  Product p, @PathVariable int u_id)
+	{
+		return s.saveP(p, u_id);
+	}
+}

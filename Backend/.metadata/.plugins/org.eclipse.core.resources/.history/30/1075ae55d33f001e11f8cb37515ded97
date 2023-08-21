@@ -1,0 +1,8 @@
+package org.jsp.moneyexpenses.repository;
+
+import org.jsp.moneyexpenses.dto.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+
+}

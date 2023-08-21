@@ -1,0 +1,10 @@
+package org.jsp.moneyexpenses.exception;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class MoneyExceptionHandler {
+
+	@ExceptionHandler()
+}

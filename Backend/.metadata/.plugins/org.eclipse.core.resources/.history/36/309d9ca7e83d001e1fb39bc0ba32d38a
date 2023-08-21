@@ -1,0 +1,5 @@
+package org.jsp.moneyexpenses.dto;
+
+public class User {
+
+}

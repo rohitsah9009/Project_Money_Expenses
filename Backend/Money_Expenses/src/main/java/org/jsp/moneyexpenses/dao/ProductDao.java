@@ -1,0 +1,38 @@
+package org.jsp.moneyexpenses.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.jsp.moneyexpenses.dto.Product;
+import org.jsp.moneyexpenses.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ProductDao {
+
+	@Autowired
+	private ProductRepository r;
+	
+	public Product addProduct(Product p)
+	{
+		return r.save(p);
+	}
+	public Product updateProduct(Product p)
+	{
+		return r.save(p);
+	}
+	public Optional<Product> fetchById(int id )
+	{
+		return r.findById(id);
+	}
+	public void deleteProduct(int id)
+	{
+		r.deleteById(id);
+	}
+	
+	public List<Product> fetchAllProductByUserId(int u_id)
+	{
+		return r.findAll(u_id);
+	}
+}

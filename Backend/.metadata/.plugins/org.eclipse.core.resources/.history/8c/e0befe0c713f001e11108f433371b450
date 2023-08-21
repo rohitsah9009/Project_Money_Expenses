@@ -1,0 +1,71 @@
+package org.jsp.moneyexpenses.service;
+
+import java.util.Optional;
+
+import org.jsp.moneyexpenses.dao.ProductDao;
+import org.jsp.moneyexpenses.dao.UserDao;
+import org.jsp.moneyexpenses.dto.Product;
+import org.jsp.moneyexpenses.dto.ResponseStructure;
+import org.jsp.moneyexpenses.dto.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+@Service
+
+public class ProductService {
+
+	@Autowired
+	private ProductDao pDao;
+	@Autowired
+	private UserDao uDao;
+	
+	public ResponseEntity<ResponseStructure<Product>> save(Product p, int u_id)
+	{
+		Optional<User> op=uDao.fetchById(u_id);
+		ResponseStructure<Product> s=new ResponseStructure<>();
+		if(op.isPresent())
+		{
+			User u=op.get();
+			u.getP().add(p);
+			p.setU(u);
+			uDao.updateUser(u);
+			pDao.addProduct(p);
+			s.setData(p);
+			s.setMessage("Product Added");
+			s.setStatusCode(HttpStatus.CREATED.value());
+			return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.CREATED);
+		}
+//		s.setData(p);
+		s.setMessage("Inavlid User Id");
+		s.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.NOT_FOUND);
+		
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<Product>> update(Product p, int u_id)
+	{
+		Optional<User> op=uDao.fetchById(u_id);
+		ResponseStructure<Product> s=new ResponseStructure<>();
+		if(op.isPresent())
+		{
+			User u=op.get();
+//			u.getP().add(p);
+			p.setU(u);
+//			uDao.updateUser(u);
+			pDao.updateProduct(p);
+			s.setData(p);
+			s.setMessage("Product Added");
+			s.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.ACCEPTED);
+		}
+//		s.setData(p);
+		s.setMessage("Inavlid User Id");
+		s.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<Product>>(s,HttpStatus.NOT_FOUND);
+		
+		
+	}
+}

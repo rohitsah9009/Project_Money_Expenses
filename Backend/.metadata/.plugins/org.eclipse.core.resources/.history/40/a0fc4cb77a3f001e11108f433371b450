@@ -1,0 +1,36 @@
+package org.jsp.moneyexpenses.controller;
+
+import org.jsp.moneyexpenses.dto.Product;
+import org.jsp.moneyexpenses.dto.ResponseStructure;
+import org.jsp.moneyexpenses.service.ProductService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProductController {
+
+	private ProductService s;
+	
+	@PostMapping("/products/{u_id}")
+	public ResponseEntity<ResponseStructure<Product>> save(@RequestBody  Product p, @PathVariable int u_id)
+	{
+		return s.saveP(p, u_id);
+	}
+	
+	@PutMapping("/products/{u_id}")
+	public ResponseEntity<ResponseStructure<Product>> update(@RequestBody  Product p, @PathVariable int u_id)
+	{
+		return s.updateP(p, u_id);
+	}
+	
+	@GetMapping("/product/id")
+	public ResponseEntity<ResponseStructure<Product>> fetch(@PathVariable int id)
+	{
+		return s.fetch(id);
+	}
+}
