@@ -29,7 +29,7 @@
     justify-content: space-between;
 
 }
-a{
+/* a{
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: black;
@@ -38,7 +38,7 @@ a:hover{
     border-bottom: 2px solid  rgb(140, 144, 140);
     color:  rgb(73, 83, 73);
     padding-bottom: 4px;
-}
+} */
 h1{
     font-family: 'Dancing Script', cursive;
     font-size: 40px;

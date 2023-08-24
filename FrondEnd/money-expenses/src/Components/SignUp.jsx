@@ -18,8 +18,9 @@ const SignUp = () => {
         let user={name,phone,email, address,password}
         axios.post("http://localhost:8080/users",user).then(()=>{
             alert("Account Created Successfully")
-            
             navigate("/login")
+        }).catch(()=>{
+            alert("Something is Wrong")
         })
     }
 

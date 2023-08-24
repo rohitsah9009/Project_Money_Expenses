@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {  Link, useNavigate } from "react-router-dom";
-import "../global.css"
+// import "../global.css"
 import rk from "./CSS/login.module.css"
 import axios from "axios";
 const Login = () => {
@@ -23,7 +23,10 @@ const Login = () => {
 
   return (
     <div>
-        <section className={rk.navBar}><h1 className={rk.h1}>Money Expenses</h1></section>
+        <section className={rk.navBar}>
+            <h1 className={rk.h1}>Money Expenses</h1>
+            <li><Link to="/">Home</Link></li>
+        </section>
     <div className={rk.body}>
         {/* <section></section> */}
         <section className={rk.container}>

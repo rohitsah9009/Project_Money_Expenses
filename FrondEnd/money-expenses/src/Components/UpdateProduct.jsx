@@ -55,7 +55,7 @@ const UpdateProduct=()=> {
            <section className={rk.navRight}>
                <li> <Link to="/userhome">Home</Link></li>
            <li><Link to="/addProduct">Add Product</Link></li>
-        
+           <li><Link to="/products">Products</Link></li>
            <li><Link to="/viewProfile">Profile</Link></li>
            <button onClick={logout} className="white-btn">Logout</button>
            </section>

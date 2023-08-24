@@ -10,6 +10,7 @@ import { AddProduct } from './Components/AddProduct';
 import Products from './Components/ViewProducts';
 import UpdateProduct from './Components/UpdateProduct';
 import ViewProducts from './Components/ViewProducts';
+import Protect from './Components/Protect';
 
 
 
@@ -18,16 +19,15 @@ const App = () => {
     <BrowserRouter>
     <Routes>
     <Route path="/" element={<Home/>}> </Route>
-                <Route path="/login" element={<Login/>}> </Route>
+                <Route path="/login" element={ < Login/>}> </Route>
                 <Route path="/signUp" element={<SignUp/>}> </Route>
-                <Route path="/userhome" element={<UserHome/>}> </Route>
-                <Route path="/viewProfile" element={<ViewProfile/>}> </Route>
-                <Route path="/updateProfile" element={<UpdateProfile/>}> </Route>
-                <Route path="/addProduct" element={<AddProduct/>}> </Route>
-                <Route path="/products" element={<ViewProducts/>}> </Route>
-                <Route path="/updateProduct" element={<UpdateProduct/>}> </Route>
-                
-
+                <Route path="/userhome"  element={<Protect Child={UserHome}/>}> </Route>
+                <Route path="/viewProfile" element={< Protect Child= {ViewProfile}/>}> </Route>
+                <Route path="/updateProfile" element={< Protect Child= {UpdateProfile}/>}> </Route>
+                <Route path="/addProduct" element={< Protect Child= {AddProduct}/>}> </Route>
+                <Route path="/products" element={< Protect Child= {ViewProducts}/>}> </Route>
+                <Route path="/updateProduct" element={< Protect Child= {UpdateProduct}/>}> </Route>
+            
     </Routes>
     </BrowserRouter>
   )

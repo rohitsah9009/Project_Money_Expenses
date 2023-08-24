@@ -31,4 +31,14 @@ public class MoneyExceptionHandler {
 		return new ResponseEntity<ResponseStructure<String>>(s,HttpStatus.NOT_FOUND);
 	}
 	
+@ExceptionHandler(SomeThingException.class)
+
+public ResponseEntity<ResponseStructure<String>> handleSTE(SomeThingException e)
+{
+	ResponseStructure<String> s=new ResponseStructure<>();
+	s.setData("Something is Wrong");
+	s.setMessage(e.getMessage());
+	s.setStatusCode(HttpStatus.NOT_FOUND.value());
+	return new ResponseEntity<ResponseStructure<String>>(s,HttpStatus.NOT_FOUND);
+}
 }

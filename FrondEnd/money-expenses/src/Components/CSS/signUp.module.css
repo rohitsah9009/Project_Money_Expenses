@@ -1,6 +1,6 @@
 .navBar{
     width: 100%;
-    height: 65px;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,8 @@ padding: 0px 5rem 10px 5rem;
     
 }
 .h1{
-    font-size:50px;
+    font-size:55px;
+    padding-right: 20rem;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     color: rgb(241, 232, 232);
 }

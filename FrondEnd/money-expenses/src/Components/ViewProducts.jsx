@@ -78,7 +78,7 @@ return (
     <div className={rk.container}>
       <table  className={rk.table}>
           <tr>
-              <th>Id</th>
+              {/* <th>Id</th> */}
               <th>Name</th>
               <th>Cost</th>
               <th>Comment</th>
@@ -89,12 +89,12 @@ return (
               products.map((p)=>{
                   return(
                       <tr>
-                          <td>{p.id}</td>
+                          {/* <td  >{p.id}</td> */}
                           <td>{p.name}</td>
                           <td>{p.cost}</td>
                           <td>{p.comment}</td>
                           <td><button className="white-btn" onClick={()=>{editProduct(p.id)}}>edit</button></td>
-                          <td><button className="white-btn" onClick={()=>{deleteProduct(p.id)}}>delete</button></td>
+                          <td><button className="body-btn" onClick={()=>{deleteProduct(p.id)}}>delete</button></td>
                       </tr>
                   )
               })

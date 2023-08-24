@@ -1,5 +1,5 @@
 package org.jsp.moneyexpenses.service;
-
+//User Service
 import java.util.Optional;
 
 import org.jsp.moneyexpenses.dao.UserDao;
@@ -22,12 +22,15 @@ public class UserService {
 	public ResponseEntity<ResponseStructure<User>> save(User u)
 	{
 		ResponseStructure<User> s=new ResponseStructure<>();
-		
-		s.setData(uDao.saveUser(u));
+		User u1=uDao.saveUser(u);
+		s.setData(u1);
 		s.setMessage("Account Created Successfully");
 		s.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<ResponseStructure<User>>(s,HttpStatus.OK);
 	}
+	
+	
+	
 	public ResponseEntity<ResponseStructure<User>> update(User u)
 	{
 		ResponseStructure<User> s=new ResponseStructure<>();
